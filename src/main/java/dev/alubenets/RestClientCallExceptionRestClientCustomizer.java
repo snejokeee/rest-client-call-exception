@@ -22,4 +22,24 @@
  * SOFTWARE.
  */
 
-package dev.alubenets.spring;
+package dev.alubenets;
+
+import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
+import org.springframework.boot.web.client.RestClientCustomizer;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.web.client.RestClient;
+
+class RestClientCallExceptionRestClientCustomizer implements RestClientCustomizer {
+
+    private final HttpMessageConverters messageConverters;
+
+    RestClientCallExceptionRestClientCustomizer(HttpMessageConverters messageConverters) {
+        this.messageConverters = messageConverters;
+    }
+
+    @Override
+    public void customize(RestClient.Builder restClientBuilder) {
+        restClientBuilder
+            .defaultStatusHandler(HttpStatusCode::isError, new RestClientCallExceptionHandler(messageConverters));
+    }
+}

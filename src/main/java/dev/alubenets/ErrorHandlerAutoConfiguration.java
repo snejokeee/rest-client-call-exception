@@ -22,27 +22,28 @@
  * SOFTWARE.
  */
 
-package dev.alubenets.spring;
+package dev.alubenets;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration;
-import org.springframework.boot.web.client.RestClientCustomizer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.web.client.RestClient;
 
 @AutoConfiguration(
     after = {
         HttpMessageConvertersAutoConfiguration.class,
     }
 )
+@ConditionalOnClass(RestClient.class)
 public class ErrorHandlerAutoConfiguration {
 
     @Bean
     @ConditionalOnBean(HttpMessageConverters.class)
-    public RestClientCustomizer restClientCustomizer(HttpMessageConverters messageConverters) {
-        return restClientBuilder -> restClientBuilder
-            .defaultStatusHandler(HttpStatusCode::isError, new RestClientCallExceptionHandler(messageConverters));
+    RestClientCallExceptionRestClientCustomizer restClientCustomizer(HttpMessageConverters messageConverters) {
+        return new RestClientCallExceptionRestClientCustomizer(messageConverters);
     }
+
 }

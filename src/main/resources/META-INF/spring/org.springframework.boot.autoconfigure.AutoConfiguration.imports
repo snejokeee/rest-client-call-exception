@@ -22,4 +22,4 @@
 # SOFTWARE.
 #
 
-dev.alubenets.spring.ErrorHandlerAutoConfiguration
+dev.alubenets.ErrorHandlerAutoConfiguration

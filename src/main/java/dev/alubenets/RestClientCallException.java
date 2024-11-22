@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package dev.alubenets.spring;
+package dev.alubenets;
 
 import org.springframework.core.ResolvableType;
 import org.springframework.http.HttpRequest;
@@ -34,6 +34,7 @@ import java.util.function.Function;
  * @see <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/client/package-tree.html">Hierarchy For Package org.springframework.web.client</a>
  */
 public class RestClientCallException extends RestClientResponseException {
+
     private final transient HttpRequest request;
 
     RestClientCallException(HttpRequest request, RestClientResponseException cause) {

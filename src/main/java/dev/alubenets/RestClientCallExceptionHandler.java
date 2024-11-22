@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package dev.alubenets.spring;
+package dev.alubenets;
 
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.core.ResolvableType;
@@ -88,7 +88,7 @@ class RestClientCallExceptionHandler implements RestClient.ResponseSpec.ErrorHan
      * @throws RestClientCallException wrapper around {@link RestClientResponseException}
      */
     @Override
-    public void handle(HttpRequest request, ClientHttpResponse response) throws RestClientException, IOException {
+    public void handle(HttpRequest request, ClientHttpResponse response) throws RestClientCallException, IOException {
         var cachedBodyResponse = new CachedBodyResponse(response);
         var statusCode = response.getStatusCode();
         var statusText = response.getStatusText();

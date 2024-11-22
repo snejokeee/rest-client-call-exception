@@ -22,48 +22,57 @@
  * SOFTWARE.
  */
 
-package dev.alubenets.spring;
+package dev.alubenets;
 
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpInputMessage;
-import org.springframework.http.MediaType;
-import org.springframework.lang.NonNull;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.lang.Nullable;
-import org.springframework.util.FileCopyUtils;
+import org.springframework.util.StreamUtils;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.Optional;
+import java.io.InputStream;
 
 /**
- * reference {@link org.springframework.web.client.RestClientUtils}
+ * reference {@link org.springframework.web.client.ClientHttpResponseDecorator}, {@link org.springframework.http.client.BufferingClientHttpResponseWrapper}
  */
-abstract class ExceptionResponseUtils {
+final class CachedBodyResponse implements ClientHttpResponse {
 
-    private ExceptionResponseUtils() {
+    private final ClientHttpResponse delegate;
+
+    @Nullable
+    private byte[] body;
+
+    public CachedBodyResponse(ClientHttpResponse delegate) {
+        this.delegate = delegate;
     }
 
-    /**
-     * @return {@code byte[]} copy of full message body
-     */
-    public static byte[] getBody(HttpInputMessage message) {
-        try {
-            return FileCopyUtils.copyToByteArray(message.getBody());
-        } catch (IOException ignored) {
-            // silence any exceptions to return empty byte array as fallback
+    @Override
+    public HttpStatusCode getStatusCode() throws IOException {
+        return this.delegate.getStatusCode();
+    }
+
+    @Override
+    public String getStatusText() throws IOException {
+        return this.delegate.getStatusText();
+    }
+
+    @Override
+    public void close() {
+        this.delegate.close();
+    }
+
+    @Override
+    public InputStream getBody() throws IOException {
+        if (this.body == null) {
+            this.body = StreamUtils.copyToByteArray(this.delegate.getBody());
         }
-        return new byte[0];
+        return new ByteArrayInputStream(this.body);
     }
 
-    /**
-     * @return charset from {@code Content-Type} header or {@code UTF_8} as fallback
-     */
-    @NonNull
-    public static Charset getCharset(@Nullable HttpHeaders headers) {
-        return Optional.ofNullable(headers)
-            .map(HttpHeaders::getContentType)
-            .map(MediaType::getCharset)
-            .orElse(StandardCharsets.UTF_8);
+    @Override
+    public HttpHeaders getHeaders() {
+        return this.delegate.getHeaders();
     }
 }
