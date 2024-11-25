@@ -1,8 +1,10 @@
 # RestClientCallException
 
+A simple wrapper around RestClientResponseException that can contain an instance of HttpRequest inside it.
+
 ## What is the problem ?
 
-In some cases, you may want an instance of `HttpRequest` sent along with your `RestClient`.
+In some cases, you may want an instance of `HttpRequest` sent by `RestClient`.
 But this is not possible because the default status handler `org.springframework.web.client.StatusHandler#defaultHandler(List)` ignores the request parameter when creating `RestClientException` and its successors.
 
 More information at:
@@ -11,11 +13,11 @@ More information at:
 
 ## Solution
 
-This dependency introduces a new `RestClientException` descendant class for the exception - `RestClientCallException` and injects a pre-configured `RestClient.ResponseSpec.ErrorHandler` into `RestClient.Builder` via `RestClientCustomizer`.
+This dependency introduces a new `RestClientCallException` (successor of `RestClientResponseException`) class and injects a pre-configured `RestClient.ResponseSpec.ErrorHandler` into `RestClient.Builder` via `RestClientCustomizer`.
 
 ## Quick Start
 
-Actual versions you can find on [mavenCentral](https://mvnrepository.com/artifact/dev.alubenets/rest-client-call-exception)
+Actual versions you can find on [mavenCentral](https://mvnrepository.com/artifact/dev/alubenets/rest-client-call-exception)
 
 ### Gradle
 
