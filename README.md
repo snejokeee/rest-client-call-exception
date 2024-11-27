@@ -1,4 +1,5 @@
 # RestClientCallException
+![Maven Central Version](https://img.shields.io/maven-central/v/dev.alubenets/rest-client-call-exception)
 
 A simple wrapper around RestClientResponseException that can contain an instance of HttpRequest inside it.
 
@@ -17,7 +18,7 @@ This dependency introduces a new `RestClientCallException` (successor of `RestCl
 
 ## Quick Start
 
-Actual versions you can find on [mavenCentral](https://mvnrepository.com/artifact/dev/alubenets/rest-client-call-exception)
+Actual version you can find on [mavenCentral](https://central.sonatype.com/artifact/dev.alubenets/rest-client-call-exception/overview)
 
 ### Gradle
 
