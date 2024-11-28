@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package dev.alubenets;
+package dev.alubenets.exceptions;
 
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.core.ResolvableType;

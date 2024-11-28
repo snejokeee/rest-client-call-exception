@@ -22,11 +22,13 @@
  * SOFTWARE.
  */
 
-package dev.alubenets;
+package dev.alubenets.exceptions;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -38,7 +40,7 @@ import org.springframework.web.client.RestClient;
     }
 )
 @ConditionalOnClass(RestClient.class)
-public class ErrorHandlerAutoConfiguration {
+public class RestClientCallExceptionAutoConfiguration {
 
     @Bean
     @ConditionalOnBean(HttpMessageConverters.class)
@@ -46,4 +48,10 @@ public class ErrorHandlerAutoConfiguration {
         return new RestClientCallExceptionRestClientCustomizer(messageConverters);
     }
 
+    @Bean
+    @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
+    @ConditionalOnProperty(prefix = "dev.alubenets.exceptions", value = "enable-default-advice", havingValue = "true", matchIfMissing = true)
+    RestClientCallExceptionAdvice restClientCallExceptionAdvice() {
+        return new RestClientCallExceptionAdvice();
+    }
 }

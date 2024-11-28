@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package dev.alubenets;
+package dev.alubenets.exceptions;
 
 import org.springframework.core.ResolvableType;
 import org.springframework.http.HttpRequest;

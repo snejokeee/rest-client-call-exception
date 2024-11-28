@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "dev.alubenets"
-version = "0.0.1"
+version = "0.0.2"
 description =
     "A simple wrapper around RestClientResponseException that can contain an instance of HttpRequest inside it."
 
@@ -23,9 +23,13 @@ repositories {
 
 dependencies {
     api ("org.springframework:spring-web:6.1.14")
+    api ("jakarta.servlet:jakarta.servlet-api:6.0.0")
     api ("org.springframework.boot:spring-boot-autoconfigure:3.2.11")
     api ("com.google.code.findbugs:jsr305:3.0.2")
+    api("org.slf4j:slf4j-api:2.0.16")
+
     testImplementation ("org.springframework.boot:spring-boot-starter-test:3.2.11")
+    testImplementation ("org.springframework.boot:spring-boot-starter-web:3.2.11")
     testRuntimeOnly ("org.junit.platform:junit-platform-launcher")
 }
 

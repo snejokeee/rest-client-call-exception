@@ -37,4 +37,8 @@ implementation 'dev.alubenets:rest-client-call-exception:<version>'
 
 ## How to use
 
+Just for example, a default `@RestControllerAdvice` is introduced with one method `@ExceptionHandler`, which intercepts the `RestClientCallException` and formats the response compatible with [RFC-9457](https://datatracker.ietf.org/doc/html/rfc9457 ). You can disable this advice by setting the `dev.alubenets.exceptions.enable-default-advice` property to `false`. You can find implementation in `dev.alubenets.exceptions.RestClientCallExceptionAdvice` class.
+
 ## How does it work ?
+
+`<TBD>`
