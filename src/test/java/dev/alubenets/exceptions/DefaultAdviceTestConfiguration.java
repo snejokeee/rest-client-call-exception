@@ -22,4 +22,33 @@
  * SOFTWARE.
  */
 
-package dev.alubenets;
+package dev.alubenets.exceptions;
+
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClient;
+
+@TestConfiguration
+public class DefaultAdviceTestConfiguration {
+
+    @RestController
+    static class ReferenceRestController {
+
+        private final RestClient.Builder restClientBuilder;
+
+        ReferenceRestController(RestClient.Builder restClientBuilder) {
+            this.restClientBuilder = restClientBuilder;
+        }
+
+        @GetMapping("/test/path")
+        public String testPath() {
+            restClientBuilder.build()
+                .get()
+                .uri("/exception/path")
+                .retrieve()
+                .toBodilessEntity();
+            return "test";
+        }
+    }
+}

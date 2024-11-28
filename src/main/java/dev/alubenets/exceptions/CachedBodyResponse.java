@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package dev.alubenets;
+package dev.alubenets.exceptions;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;

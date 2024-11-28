@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright © 2024. Aleksey Lubenets <alubenets.dev>
+ * Copyright (c) 2024. Aleksey Lubenets <alubenets.dev>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-package dev.alubenets;
+package dev.alubenets.exceptions;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.client.RestClientAutoConfiguration;
@@ -34,7 +33,6 @@ import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.client.match.MockRestRequestMatchers;
@@ -45,13 +43,12 @@ import org.springframework.web.client.RestClient;
 
 import java.util.List;
 
-@ExtendWith(SpringExtension.class)
 @Import({
     HttpMessageConvertersAutoConfiguration.class,
     RestClientAutoConfiguration.class,
-    ErrorHandlerAutoConfiguration.class
+    RestClientCallExceptionAutoConfiguration.class
 })
-@ContextConfiguration(classes = ErrorHandlerAutoConfiguration.class)
+@ContextConfiguration(classes = RestClientCallExceptionAutoConfiguration.class)
 @RestClientTest
 class IntegrationTests {
 
@@ -114,4 +111,5 @@ class IntegrationTests {
         );
         Assertions.assertInstanceOf(HttpClientErrorException.BadRequest.class, thrownException.getCause());
     }
+
 }

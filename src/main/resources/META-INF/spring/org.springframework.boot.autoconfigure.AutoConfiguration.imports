@@ -22,4 +22,4 @@
 # SOFTWARE.
 #
 
-dev.alubenets.ErrorHandlerAutoConfiguration
+dev.alubenets.exceptions.RestClientCallExceptionAutoConfiguration
