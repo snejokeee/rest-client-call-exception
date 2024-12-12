@@ -24,7 +24,7 @@ repositories {
 dependencies {
     api ("org.springframework:spring-web:6.1.14")
     api ("jakarta.servlet:jakarta.servlet-api:6.0.0")
-    api ("org.springframework.boot:spring-boot-autoconfigure:3.2.11")
+    api ("org.springframework.boot:spring-boot-autoconfigure:3.4.0")
     api ("com.google.code.findbugs:jsr305:3.0.2")
     api("org.slf4j:slf4j-api:2.0.16")
 
