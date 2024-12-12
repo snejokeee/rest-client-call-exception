@@ -9,3 +9,5 @@ updates:
         versions: [">=3.3.x"]
       - dependency-name: "org.springframework:*"
         versions: [">=6.2.x"]
+      - dependency-name: "jakarta.servlet:jakarta.servlet-api"
+        versions: [ ">=6.1.x" ]
