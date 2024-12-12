@@ -26,11 +26,12 @@ dependencies {
     api ("jakarta.servlet:jakarta.servlet-api:6.0.0")
     api ("org.springframework.boot:spring-boot-autoconfigure:3.2.12")
     api ("com.google.code.findbugs:jsr305:3.0.2")
-    api ("org.slf4j:slf4j-api:2.0.16")
+    api("org.slf4j:slf4j-api:2.0.16")
 
     testImplementation ("org.springframework.boot:spring-boot-starter-test:3.2.12")
     testImplementation ("org.springframework.boot:spring-boot-starter-web:3.2.12")
-    testImplementation("org.xmlunit:xmlunit-core:2.10.0")
+    testImplementation("org.springframework:spring-webmvc:6.1.16")
+    testImplementation("org.xmlunit:xmlunit-core:2.10.0 ")
     testRuntimeOnly ("org.junit.platform:junit-platform-launcher")
 }
 
