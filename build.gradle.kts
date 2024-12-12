@@ -28,7 +28,7 @@ dependencies {
     api ("com.google.code.findbugs:jsr305:3.0.2")
     api("org.slf4j:slf4j-api:2.0.16")
 
-    testImplementation ("org.springframework.boot:spring-boot-starter-test:3.2.11")
+    testImplementation ("org.springframework.boot:spring-boot-starter-test:3.2.12")
     testImplementation ("org.springframework.boot:spring-boot-starter-web:3.2.11")
     testRuntimeOnly ("org.junit.platform:junit-platform-launcher")
 }
