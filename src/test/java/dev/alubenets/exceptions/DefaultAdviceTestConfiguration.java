@@ -41,6 +41,7 @@ public class DefaultAdviceTestConfiguration {
             this.restClientBuilder = restClientBuilder;
         }
 
+        @SuppressWarnings({"unused"})
         @GetMapping("/test/path")
         public String testPath() {
             restClientBuilder.build()
