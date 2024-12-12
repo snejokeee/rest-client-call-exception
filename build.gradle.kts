@@ -31,7 +31,7 @@ dependencies {
     testImplementation ("org.springframework.boot:spring-boot-starter-test:3.2.12")
     testImplementation ("org.springframework.boot:spring-boot-starter-web:3.2.12")
     testImplementation("org.springframework:spring-webmvc:6.1.16")
-    testImplementation("org.xmlunit:xmlunit-core:2.10.0 ")
+    testImplementation("org.xmlunit:xmlunit-core:2.10.0")
     testRuntimeOnly ("org.junit.platform:junit-platform-launcher")
 }
 
