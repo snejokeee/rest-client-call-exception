@@ -1,5 +1,6 @@
 plugins {
     `java-library`
+    jacoco
     `maven-publish`
     id("org.jreleaser") version "1.15.0"
 }
@@ -35,8 +36,17 @@ dependencies {
     testRuntimeOnly ("org.junit.platform:junit-platform-launcher")
 }
 
-tasks.getByName<Test>("test") {
+tasks.jacocoTestReport {
+    reports {
+        xml.required = true
+        html.required = true
+        csv.required = true
+    }
+}
+
+tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
 }
 
 jreleaser {
