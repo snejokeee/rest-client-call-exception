@@ -42,6 +42,7 @@ tasks.jacocoTestReport {
         html.required = true
         csv.required = true
     }
+    dependsOn(tasks.test)
 }
 
 tasks.test {
