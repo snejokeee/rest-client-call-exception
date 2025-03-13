@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    api ("org.springframework:spring-web:6.1.16")
+    api ("org.springframework:spring-web:6.1.18")
     api ("jakarta.servlet:jakarta.servlet-api:6.0.0")
     api ("org.springframework.boot:spring-boot-autoconfigure:3.2.12")
     api ("com.google.code.findbugs:jsr305:3.0.2")
@@ -31,7 +31,7 @@ dependencies {
 
     testImplementation ("org.springframework.boot:spring-boot-starter-test:3.2.12")
     testImplementation ("org.springframework.boot:spring-boot-starter-web:3.2.12")
-    testImplementation("org.springframework:spring-webmvc:6.1.16")
+    testImplementation("org.springframework:spring-webmvc:6.1.18")
     testImplementation("org.xmlunit:xmlunit-core:2.10.0")
     testRuntimeOnly ("org.junit.platform:junit-platform-launcher")
 }
