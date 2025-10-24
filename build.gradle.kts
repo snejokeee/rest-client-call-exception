@@ -3,7 +3,6 @@ plugins {
     jacoco
     `maven-publish`
     id("org.jreleaser") version "1.17.0"
-    id("org.springframework.boot") version "3.5.7" apply false
     id("io.spring.dependency-management") version "1.1.7"
 }
 
@@ -26,7 +25,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.7")
     }
 }
 
