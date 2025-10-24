@@ -3,6 +3,7 @@ plugins {
     jacoco
     `maven-publish`
     id("org.jreleaser") version "1.17.0"
+    id("io.spring.dependency-management") version "1.1.7"
 }
 
 group = "dev.alubenets"
@@ -22,18 +23,24 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    api ("org.springframework:spring-web:6.1.21")
-    api ("jakarta.servlet:jakarta.servlet-api:6.0.0")
-    api ("org.springframework.boot:spring-boot-autoconfigure:3.2.12")
-    api ("com.google.code.findbugs:jsr305:3.0.2")
-    api("org.slf4j:slf4j-api:2.0.17")
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.7")
+    }
+}
 
-    testImplementation ("org.springframework.boot:spring-boot-starter-test:3.2.12")
-    testImplementation ("org.springframework.boot:spring-boot-starter-web:3.2.12")
-    testImplementation("org.springframework:spring-webmvc:6.1.21")
-    testImplementation("org.xmlunit:xmlunit-core:2.10.0")
-    testRuntimeOnly ("org.junit.platform:junit-platform-launcher")
+dependencies {
+    api("org.springframework:spring-web")
+    api("jakarta.servlet:jakarta.servlet-api:6.0.0")
+    api("org.springframework.boot:spring-boot-autoconfigure")
+    api("com.google.code.findbugs:jsr305:3.0.2")
+    api("org.slf4j:slf4j-api")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-web")
+    testImplementation("org.springframework:spring-webmvc")
+    testImplementation("org.xmlunit:xmlunit-core")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.jacocoTestReport {
@@ -53,7 +60,7 @@ tasks.test {
 jreleaser {
     project {
         author("Aleksey Lubenets")
-        inceptionYear = "2024"
+        inceptionYear = "2025"
     }
     signing {
         active = org.jreleaser.model.Active.ALWAYS
@@ -76,7 +83,7 @@ jreleaser {
                     name = project.name
                     description = project.description
                     url = "https://github.com/snejokeee/rest-client-call-exception"
-                    inceptionYear = "2024"
+                    inceptionYear = "2025"
                     licenses {
                         license {
                             name = "MIT License"
