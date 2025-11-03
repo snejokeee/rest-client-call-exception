@@ -6,8 +6,8 @@ updates:
       interval: "daily"
     ignore:
       - dependency-name: "org.springframework.boot:*"
-        versions: [">=3.3.x"]
+        versions: [">=3.5.x"]
       - dependency-name: "org.springframework:*"
         versions: [">=6.2.x"]
       - dependency-name: "jakarta.servlet:jakarta.servlet-api"
-        versions: [ ">=6.1.x" ]
+        versions: [ ">=6.0.x" ]

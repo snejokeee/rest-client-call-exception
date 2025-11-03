@@ -56,7 +56,6 @@ tasks.test {
     finalizedBy(tasks.jacocoTestReport)
 }
 
-
 jreleaser {
     project {
         inceptionYear.set("2025")
