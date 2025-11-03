@@ -2,13 +2,13 @@ plugins {
     `java-library`
     jacoco
     `maven-publish`
-    id("org.jreleaser") version "1.15.0"
+    id("org.jreleaser") version "1.17.0"
+    id("io.spring.dependency-management") version "1.1.7"
 }
 
 group = "dev.alubenets"
-version = "0.0.2"
-description =
-    "A simple wrapper around RestClientResponseException that can contain an instance of HttpRequest inside it."
+version = "0.0.3"
+description = "A simple wrapper around RestClientResponseException that can contain an instance of HttpRequest inside it."
 
 java {
     toolchain {
@@ -22,18 +22,24 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    api ("org.springframework:spring-web:6.1.16")
-    api ("jakarta.servlet:jakarta.servlet-api:6.0.0")
-    api ("org.springframework.boot:spring-boot-autoconfigure:3.2.12")
-    api ("com.google.code.findbugs:jsr305:3.0.2")
-    api("org.slf4j:slf4j-api:2.0.16")
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.7")
+    }
+}
 
-    testImplementation ("org.springframework.boot:spring-boot-starter-test:3.2.12")
-    testImplementation ("org.springframework.boot:spring-boot-starter-web:3.2.12")
-    testImplementation("org.springframework:spring-webmvc:6.1.16")
-    testImplementation("org.xmlunit:xmlunit-core:2.10.0")
-    testRuntimeOnly ("org.junit.platform:junit-platform-launcher")
+dependencies {
+    api("org.springframework:spring-web")
+    api("jakarta.servlet:jakarta.servlet-api:6.0.0")
+    api("org.springframework.boot:spring-boot-autoconfigure")
+    api("com.google.code.findbugs:jsr305:3.0.2")
+    api("org.slf4j:slf4j-api")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-web")
+    testImplementation("org.springframework:spring-webmvc")
+    testImplementation("org.xmlunit:xmlunit-core")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.jacocoTestReport {
@@ -50,69 +56,42 @@ tasks.test {
     finalizedBy(tasks.jacocoTestReport)
 }
 
+
 jreleaser {
     project {
-        author("Aleksey Lubenets")
-        inceptionYear = "2024"
+        inceptionYear.set("2025")
     }
+
     signing {
         active = org.jreleaser.model.Active.ALWAYS
         armored = true
         verify = true
     }
+
     release {
         github {
-            repoOwner = "snejokeee"
+            repoOwner.set("snejokeee")
+            repoUrl.set("https://github.com/snejokeee/rest-client-call-exception")
             sign = true
             branch = "master"
             overwrite = true
         }
     }
-    publishing {
-        publications {
-            create<MavenPublication>("maven") {
-                from(components["java"])
-                pom {
-                    name = project.name
-                    description = project.description
-                    url = "https://github.com/snejokeee/rest-client-call-exception"
-                    inceptionYear = "2024"
-                    licenses {
-                        license {
-                            name = "MIT License"
-                            url = "https://spdx.org/licenses/MIT.html"
-                        }
-                    }
-                    developers {
-                        developer {
-                            id = "snejokeee"
-                            name = "Aleksey Lubenets"
-                            email = "an.lubenets@gmail.com"
-                            url = "https://alubenets.dev"
-                        }
-                    }
-                    scm {
-                        connection = "scm:git:https://github.com/snejokeee/rest-client-call-exception.git"
-                        developerConnection = "scm:git:ssh://github.com/snejokeee/rest-client-call-exception.git"
-                        url = "https://github.com/snejokeee/rest-client-call-exception"
-                    }
-                }
-            }
 
-        }
-    }
     deploy {
         maven {
-            mavenCentral.create("sonatype") {
-                active = org.jreleaser.model.Active.ALWAYS
-                url = "https://central.sonatype.com/api/v1/publisher"
-                stagingRepository(layout.buildDirectory.dir("staging-deploy").get().toString())
-                snapshotSupported = false
-                setAuthorization("Basic")
-                sign = true
-                checksums = true
-                sourceJar = true
-                javadocJar = true
+            mavenCentral {
+                register("sonatype") {
+                    active = org.jreleaser.model.Active.ALWAYS
+                    url = "https://central.sonatype.com/api/v1/publisher"
+                    stagingRepository(layout.buildDirectory.dir("staging-deploy").get().toString())
+                    snapshotSupported = false
+                    setAuthorization("Basic")
+                    sign = true
+                    checksums = true
+                    sourceJar = true
+                    javadocJar = true
+                }
             }
         }
     }
@@ -121,30 +100,31 @@ jreleaser {
 publishing {
     publications {
         create<MavenPublication>("library") {
+            artifactId = rootProject.name
             from(components["java"])
             pom {
-                name = project.name
-                description = project.description
-                url = "https://github.com/snejokeee/rest-client-call-exception"
-                inceptionYear = "2024"
+                name.set(project.name)
+                description.set(project.description)
+                url.set("https://github.com/snejokeee/rest-client-call-exception")
+                inceptionYear.set("2025")
                 licenses {
                     license {
-                        name = "MIT License"
-                        url = "https://spdx.org/licenses/MIT.html"
+                        name.set("MIT License")
+                        url.set("https://spdx.org/licenses/MIT.html")
                     }
                 }
                 developers {
                     developer {
-                        id = "snejokeee"
-                        name = "Aleksey Lubenets"
-                        email = "an.lubenets@gmail.com"
-                        url = "https://alubenets.dev"
+                        id.set("snejokeee")
+                        name.set("Aleksey Lubenets")
+                        email.set("an.lubenets@gmail.com")
+                        url.set("https://alubenets.dev")
                     }
                 }
                 scm {
-                    connection = "scm:git:https://github.com/snejokeee/rest-client-call-exception.git"
-                    developerConnection = "scm:git:ssh://github.com/snejokeee/rest-client-call-exception.git"
-                    url = "https://github.com/snejokeee/rest-client-call-exception"
+                    connection.set("scm:git:https://github.com/snejokeee/rest-client-call-exception.git")
+                    developerConnection.set("scm:git:ssh://github.com/snejokeee/rest-client-call-exception.git")
+                    url.set("https://github.com/snejokeee/rest-client-call-exception")
                 }
             }
         }
@@ -153,19 +133,6 @@ publishing {
         maven {
             name = "staging"
             url = uri(layout.buildDirectory.dir("staging-deploy"))
-        }
-        maven {
-            name = "ALubenetsRepository"
-            val releasesRepoUrl = uri("https://repo.alubenets.dev/releases/")
-            val snapshotsRepoUrl = uri("https://repo.alubenets.dev/snapshots/")
-            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
-            credentials {
-                username = project.properties["repo.alubenets.dev.username"] as String?
-                password = project.properties["repo.alubenets.dev.token"] as String?
-            }
-            authentication {
-                create<BasicAuthentication>("basic")
-            }
         }
     }
 }
