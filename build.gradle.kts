@@ -2,7 +2,7 @@ plugins {
     `java-library`
     jacoco
     `maven-publish`
-    id("org.jreleaser") version "1.17.0"
+    id("org.jreleaser") version "1.23.0"
     id("io.spring.dependency-management") version "1.1.7"
 }
 
